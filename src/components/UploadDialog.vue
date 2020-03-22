@@ -1,55 +1,106 @@
 <template>
   <v-dialog
-  class="qa-uploaddialog"
-  overlay-opacity="0"
-  max-width="1000"
-  v-model="dialog"
-  persistent>
+    class="qa-uploaddialog"
+    overlay-opacity="0"
+    max-width="1000"
+    v-model="dialog"
+    persistent
+  >
     <template v-slot:activator="{on}">
-      <v-btn class="qa-uploaddialog-open" depressed v-on="on">Upload</v-btn>
+      <v-btn
+
+        class="qa-uploaddialog-open"
+        depressed
+        v-on="on"
+        color="pink accent-3"
+      >
+        + Upload
+      </v-btn>
     </template>
-    <v-card class="qa-uploaddialog-card" tile min-height="1000">
-      <v-toolbar class="mb-12" flat color="teal">
+    <v-card
+      class="qa-uploaddialog-card"
+      tile
+      min-height="1000"
+    >
+      <v-toolbar
+        class="mb-12"
+        flat
+        color="teal"
+      >
         <span class="white--text">Upload Image</span>
-        <v-spacer></v-spacer>
-        <v-btn text class="qa-uploaddialog-close" dark @click="dialog = false">close</v-btn>
+        <v-spacer />
+        <v-btn
+          text
+          class="qa-uploaddialog-close"
+          dark
+          @click="dialog = false"
+        >
+          close
+        </v-btn>
       </v-toolbar>
       <v-row justify="center">
         <v-col cols="8">
-          <v-alert type="info" dark>
+          <v-alert
+            type="info"
+            dark
+          >
             Files should only contain valid extensions such as jpeg, png, webp and gif.
           </v-alert>
         </v-col>
       </v-row>
       <v-row justify="center">
         <v-col cols="8">
-          <v-img max-height="500px" v-if="filePreview" :src="filePreview">
-          </v-img>
-          <v-skeleton-loader v-else height="500" min-height="500" type="image"></v-skeleton-loader>
+          <v-img
+            max-height="500px"
+            v-if="filePreview"
+            :src="filePreview"
+          />
+          <v-skeleton-loader
+            v-else
+            height="500"
+            min-height="500"
+            type="image"
+          />
         </v-col>
       </v-row>
-      <v-row justify="center" >
+      <v-row justify="center">
         <v-col cols="6">
-           <v-file-input
-              class="qa-uploaddialog-fileuploader"
-              ref="fileupload"
-              :rules="rules"
-              accept="image/png, image/jpeg, image/bmp"
-              placeholder="Select an Image"
-              prepend-icon="mdi-camera"
-              label="Upload"
-              @change="fileHandler($event)"
-              @click:clear="clear"
-            ></v-file-input>
+          <v-file-input
+            class="qa-uploaddialog-fileuploader"
+            ref="fileupload"
+            :rules="rules"
+            accept="image/png, image/jpeg, image/bmp"
+            placeholder="Select an Image"
+            prepend-icon="mdi-camera"
+            label="Upload"
+            @change="fileHandler($event)"
+            @click:clear="clear"
+          />
         </v-col>
       </v-row>
       <v-card-actions>
         <v-row justify="center">
           <v-col cols="4">
-            <v-btn @click="cancelUpload" color="error" large block>Cancel</v-btn>
+            <v-btn
+              depressed
+              @click="cancelUpload"
+              color="error"
+              large
+              block
+            >
+              Cancel
+            </v-btn>
           </v-col>
           <v-col cols="4">
-            <v-btn :disabled="!selectedFile" color="primary" large block>Upload</v-btn>
+            <v-btn
+              depressed
+              :disabled="!selectedFile"
+              color="primary"
+              large
+              block
+            >
+              Upload
+            </v-btn>
           </v-col>
         </v-row>
       </v-card-actions>
