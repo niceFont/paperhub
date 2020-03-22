@@ -4,6 +4,7 @@ module.exports = {
     node: true,
   },
   extends: [
+    'plugin:vue/strongly-recommended',
     'plugin:vue/essential',
     '@vue/airbnb',
   ],
@@ -13,6 +14,13 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'vue/html-indent': ['error', 2, {
+      attribute: 1,
+      baseIndent: 1,
+      closeBracket: 0,
+      alignAttributesVertically: true,
+      ignores: [],
+    }],
   },
   overrides: [
     {
