@@ -23,9 +23,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Installing Dependencies
-      with: 
-        cmd: npm ci
+      run: npm ci
     
     - name: Running Tests
-      with: 
-        cmd: npm run test:unit
+      run: npm run test:unit
