@@ -98,6 +98,7 @@
               color="primary"
               large
               block
+              @click="upload"
             >
               Upload
             </v-btn>
@@ -109,6 +110,8 @@
 </template>
 
 <script>
+const { VUE_APP_API_ENDPOINT } = process.env;
+
 export default {
   name: 'UploadDialog',
   data: () => ({
@@ -120,8 +123,25 @@ export default {
     filePreview: null,
   }),
   methods: {
+    async upload() {
+      try {
+        const body = new FormData();
+        body.append('file', this.selectedFile);
+        body.append('type', this.selectedFile.type.split('/')[1]);
+        await fetch(`${VUE_APP_API_ENDPOINT}/images`, {
+          method: 'POST',
+          credentials: 'include',
+          body,
+        });
+      } catch (error) {
+        this.error = error;
+        console.log(error);
+      } finally {
+        this.$router.push({ name: 'Home' });
+      }
+    },
     fileHandler(file) {
-      console.log(file);
+      console.log(file.type);
       this.selectedFile = file;
     },
     clear() {

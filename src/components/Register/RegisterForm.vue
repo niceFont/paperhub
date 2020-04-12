@@ -41,6 +41,7 @@
                 color="pink accent-3"
                 v-model="email"
                 :rules="emailRules"
+                type="email"
                 label="E-Mail"
                 required
               />
@@ -48,6 +49,7 @@
                 outlined
                 color="pink accent-3"
                 v-model="password"
+                type="password"
                 :rules="passwordRules"
                 label="Password"
                 required
@@ -55,6 +57,7 @@
               <v-text-field
                 outlined
                 color="pink accent-3"
+                type="password"
                 v-model="passwordRepeat"
                 :rules="passwordRules"
                 label="Repeat Password"
@@ -74,6 +77,7 @@
                 color="pink accent-3"
                 block
                 large
+                @click="handleSubmit"
               >
                 Register
               </v-btn>
@@ -86,6 +90,8 @@
 </template>
 
 <script>
+const { VUE_APP_API_ENDPOINT } = process.env;
+
 export default {
   name: 'RegisterForm',
   data() {
@@ -111,8 +117,32 @@ export default {
       password: '',
       email: '',
       passwordRepeat: '',
-      rememberMe: false,
+      error: null,
     };
+  },
+  methods: {
+    async handleSubmit() {
+      try {
+        const body = JSON.stringify({
+          username: this.username,
+          email: this.email,
+          password: this.password,
+        });
+
+        const response = await fetch(`${VUE_APP_API_ENDPOINT}/user/register`, {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body,
+        });
+
+        if (response.ok) this.$router.push({ name: 'home' });
+      } catch (error) {
+        console.log(error);
+        this.error = error;
+      }
+    },
   },
 };
 </script>
