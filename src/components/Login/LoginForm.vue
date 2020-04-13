@@ -1,6 +1,6 @@
 <template>
   <v-row
-    class="mt-12"
+    class="mt-12 qa-loginform"
     justify="center"
   >
     <v-col
@@ -21,7 +21,6 @@
         </v-toolbar>
         <v-form
           ref="form"
-          v-model="valid"
           lazy-validation
         >
           <v-row
@@ -40,6 +39,7 @@
               <v-text-field
                 outlined
                 color="pink accent-3"
+                type="password"
                 v-model="password"
                 :rules="passwordRules"
                 label="Password"
@@ -70,7 +70,8 @@
             >
               <v-btn
                 depressed
-                class="ma-10"
+                class="ma-10 qa-loginform-login"
+                @click="login"
                 dark
                 color="pink accent-3"
                 block
@@ -87,8 +88,39 @@
 </template>
 
 <script>
+
+import { mapMutations } from 'vuex';
+
+const { VUE_APP_API_ENDPOINT } = process.env;
+
 export default {
   name: 'LoginForm',
+  methods: {
+    async login() {
+      try {
+        const body = JSON.stringify({
+          username: this.username,
+          password: this.password,
+        });
+        await fetch(`${VUE_APP_API_ENDPOINT}/user/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body,
+        });
+        this.setLogin();
+        this.$router.push({ name: '/' });
+      } catch (error) {
+        this.error = error;
+        console.log(error);
+      }
+    },
+    ...mapMutations({
+      setLogin: 'user/login',
+    }),
+  },
   data: () => ({
     username: '',
     usernameRules: [
@@ -98,6 +130,7 @@ export default {
       (v) => !!v || 'Password is required',
     ],
     password: '',
+    error: null,
     rememberMe: false,
   }),
 };

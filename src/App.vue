@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="qa-app">
     <top-bar />
     <v-content>
       <router-view />
@@ -9,6 +9,7 @@
 
 <script>
 import TopBar from '@/components/Home/TopBar.vue';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'App',
@@ -16,7 +17,12 @@ export default {
   components: {
     TopBar,
   },
-
+  mounted() {
+    this.loadSession();
+  },
+  methods: {
+    ...mapActions(['loadSession']),
+  },
   data: () => ({
     //
   }),

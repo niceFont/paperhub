@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="qa-home">
     <h1>Welcome Home</h1>
   </div>
 </template>

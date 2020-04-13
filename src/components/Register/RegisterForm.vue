@@ -1,6 +1,6 @@
 <template>
   <v-row
-    class="mt-12"
+    class="mt-12 qa-registerform"
     justify="center"
   >
     <v-col
@@ -41,6 +41,7 @@
                 color="pink accent-3"
                 v-model="email"
                 :rules="emailRules"
+                type="email"
                 label="E-Mail"
                 required
               />
@@ -48,6 +49,7 @@
                 outlined
                 color="pink accent-3"
                 v-model="password"
+                type="password"
                 :rules="passwordRules"
                 label="Password"
                 required
@@ -55,6 +57,7 @@
               <v-text-field
                 outlined
                 color="pink accent-3"
+                type="password"
                 v-model="passwordRepeat"
                 :rules="passwordRules"
                 label="Repeat Password"
@@ -69,11 +72,12 @@
             >
               <v-btn
                 depressed
-                class="ma-10"
+                class="ma-10 qa-registerform-register"
                 dark
                 color="pink accent-3"
                 block
                 large
+                @click="handleSubmit"
               >
                 Register
               </v-btn>
@@ -86,6 +90,8 @@
 </template>
 
 <script>
+const { VUE_APP_API_ENDPOINT } = process.env;
+
 export default {
   name: 'RegisterForm',
   data() {
@@ -100,10 +106,6 @@ export default {
         (v) => !!v || 'Password is required',
         (v) => (v && v.length >= 8) || 'Password must be atleast 8 characters long',
       ],
-      passwordRepeatRules: [
-        (v) => !!v || 'Password is required',
-        (v) => (v && v.length >= 8) || 'Password must be atleast 8 characters long',
-      ],
       emailRules: [
         (v) => !!v || 'E-Mail is required',
         (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
@@ -111,8 +113,32 @@ export default {
       password: '',
       email: '',
       passwordRepeat: '',
-      rememberMe: false,
+      error: null,
     };
+  },
+  methods: {
+    async handleSubmit() {
+      try {
+        const body = JSON.stringify({
+          username: this.username,
+          email: this.email,
+          password: this.password,
+        });
+
+        await fetch(`${VUE_APP_API_ENDPOINT}/user/register`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body,
+        });
+
+        this.$router.push({ name: 'home' });
+      } catch (error) {
+        console.log(error);
+        this.error = error;
+      }
+    },
   },
 };
 </script>
