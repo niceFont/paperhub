@@ -102,7 +102,7 @@ export default {
           username: this.username,
           password: this.password,
         });
-        const res = await fetch(`${VUE_APP_API_ENDPOINT}/user/login`, {
+        await fetch(`${VUE_APP_API_ENDPOINT}/user/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -110,7 +110,6 @@ export default {
           credentials: 'include',
           body,
         });
-        console.log(res.statusText);
         this.setLogin();
         this.$router.push({ name: '/' });
       } catch (error) {

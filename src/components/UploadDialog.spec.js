@@ -4,6 +4,7 @@ import Vuetify from 'vuetify';
 import UploadDialog from './UploadDialog.vue';
 
 window.fetch = jest.fn();
+document.body.setAttribute('data-app', true);
 
 Vue.use(Vuetify);
 const localVue = createLocalVue();

@@ -20,6 +20,9 @@ describe('LoginForm.vue', () => {
       },
       actions: {
       },
+      mutations: {
+        'user/login': jest.fn(),
+      },
     }),
     mocks: {
       $router: {
@@ -27,6 +30,7 @@ describe('LoginForm.vue', () => {
       },
     },
     vuetify: new Vuetify(),
+    stubs: ['router-link'],
   });
 
   const sleep = (timeout) => new Promise((resolve) => setTimeout(resolve, timeout));

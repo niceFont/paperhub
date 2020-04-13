@@ -22,6 +22,7 @@ describe('Topbar.vue', () => {
         logout: logout || jest.fn(),
       },
     }),
+    stubs: ['router-link'],
     vuetify: new Vuetify(),
   });
 

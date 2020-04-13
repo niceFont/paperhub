@@ -6,7 +6,6 @@ import Vuex from 'vuex';
 import App from './App.vue';
 
 window.fetch = jest.fn();
-
 Vue.use(Vuetify);
 Vue.use(Vuex);
 const localVue = createLocalVue();
@@ -22,6 +21,7 @@ describe('App.vue', () => {
         loadSession: loadSession || jest.fn(),
       },
     }),
+    stubs: ['router-link', 'router-view'],
     vuetify: new Vuetify(),
   });
 

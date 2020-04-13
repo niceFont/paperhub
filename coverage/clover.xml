@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1586789356303" clover="3.2.0">
-  <project timestamp="1586789356303" name="All files">
-    <metrics statements="71" coveredstatements="71" conditionals="24" coveredconditionals="24" methods="27" coveredmethods="27" elements="122" coveredelements="122" complexity="0" loc="71" ncloc="71" packages="7" files="11" classes="11"/>
+<coverage generated="1586790869626" clover="3.2.0">
+  <project timestamp="1586790869626" name="All files">
+    <metrics statements="70" coveredstatements="70" conditionals="24" coveredconditionals="24" methods="27" coveredmethods="27" elements="121" coveredelements="121" complexity="0" loc="70" ncloc="70" packages="7" files="11" classes="11"/>
     <package name="src">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
       <file name="App.vue" path="/home/nce/Projects/paperhub/src/App.vue">
@@ -54,9 +54,9 @@
       </file>
     </package>
     <package name="src.components.Login">
-      <metrics statements="13" coveredstatements="13" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
+      <metrics statements="12" coveredstatements="12" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
       <file name="LoginForm.vue" path="/home/nce/Projects/paperhub/src/components/Login/LoginForm.vue">
-        <metrics statements="13" coveredstatements="13" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
+        <metrics statements="12" coveredstatements="12" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
         <line num="92" count="2" type="stmt"/>
         <line num="94" count="2" type="stmt"/>
         <line num="100" count="2" type="stmt"/>
@@ -64,12 +64,11 @@
         <line num="105" count="2" type="stmt"/>
         <line num="113" count="1" type="stmt"/>
         <line num="114" count="1" type="stmt"/>
-        <line num="115" count="1" type="stmt"/>
+        <line num="116" count="1" type="stmt"/>
         <line num="117" count="1" type="stmt"/>
-        <line num="118" count="1" type="stmt"/>
-        <line num="125" count="3" type="stmt"/>
-        <line num="127" count="5" type="cond" truecount="2" falsecount="0"/>
-        <line num="130" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="124" count="3" type="stmt"/>
+        <line num="126" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="129" count="5" type="cond" truecount="2" falsecount="0"/>
       </file>
     </package>
     <package name="src.components.Register">
