@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="qa-app">
     <top-bar />
     <v-content>
       <router-view />

@@ -1,6 +1,7 @@
 <template>
   <v-app-bar
     app
+    class="qa-topbar"
     color="black"
     dark
   >

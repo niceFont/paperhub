@@ -25,7 +25,7 @@
       <v-toolbar
         class="mb-12"
         flat
-        color="teal"
+        color="black"
       >
         <span class="white--text">Upload Image</span>
         <v-spacer />
@@ -93,11 +93,13 @@
           </v-col>
           <v-col cols="4">
             <v-btn
+              class="qa-uploaddialog-upload"
               depressed
-              :disabled="!selectedFile"
               color="primary"
               large
+              :disabled="!fileValid"
               block
+              :loading="loading"
               @click="upload"
             >
               Upload
@@ -116,14 +118,17 @@ export default {
   name: 'UploadDialog',
   data: () => ({
     dialog: false,
+    loading: false,
     rules: [
-      (value) => !value || value.size < 4000000 || 'Image size should be less than 4 MB!',
+      (value) => value?.size > 4000000 && 'Image too large (max 4 MB)',
+      (value) => !value?.type?.includes('image') && 'Filetype is not supported',
     ],
     selectedFile: null,
     filePreview: null,
   }),
   methods: {
     async upload() {
+      this.loading = true;
       try {
         const body = new FormData();
         body.append('file', this.selectedFile);
@@ -137,28 +142,33 @@ export default {
         this.error = error;
         console.log(error);
       } finally {
-        this.$router.push({ name: 'Home' });
+        this.loading = false;
+        this.clear();
       }
     },
     fileHandler(file) {
-      console.log(file.type);
       this.selectedFile = file;
     },
     clear() {
+      this.$refs.fileupload.clearableCallback();
       this.filePreview = null;
       this.selectedFile = null;
-      this.$refs.fileupload.clearableCallback();
     },
     cancelUpload() {
       this.clear();
-      this.filePreview = null;
-      this.selectedFile = null;
       this.dialog = false;
+    },
+  },
+  computed: {
+    fileValid() {
+      return this.rules
+        .map((rule) => !!rule(this.selectedFile))
+        .every((result) => result === false);
     },
   },
   watch: {
     selectedFile(file) {
-      if (file) {
+      if (file && file.type.includes('image')) {
         const fr = new FileReader();
         fr.onload = (data) => {
           this.filePreview = data.target.result;

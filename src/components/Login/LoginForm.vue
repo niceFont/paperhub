@@ -1,6 +1,6 @@
 <template>
   <v-row
-    class="mt-12"
+    class="mt-12 qa-loginform"
     justify="center"
   >
     <v-col
@@ -70,7 +70,7 @@
             >
               <v-btn
                 depressed
-                class="ma-10"
+                class="ma-10 qa-loginform-login"
                 @click="login"
                 dark
                 color="pink accent-3"
@@ -111,10 +111,8 @@ export default {
           body,
         });
         console.log(res.statusText);
-        if (res.ok) {
-          this.setLogin();
-          this.$router.push({ name: '/' });
-        }
+        this.setLogin();
+        this.$router.push({ name: '/' });
       } catch (error) {
         this.error = error;
         console.log(error);

@@ -1,6 +1,6 @@
 <template>
   <v-row
-    class="mt-12"
+    class="mt-12 qa-registerform"
     justify="center"
   >
     <v-col
@@ -72,7 +72,7 @@
             >
               <v-btn
                 depressed
-                class="ma-10"
+                class="ma-10 qa-registerform-register"
                 dark
                 color="pink accent-3"
                 block
@@ -106,10 +106,6 @@ export default {
         (v) => !!v || 'Password is required',
         (v) => (v && v.length >= 8) || 'Password must be atleast 8 characters long',
       ],
-      passwordRepeatRules: [
-        (v) => !!v || 'Password is required',
-        (v) => (v && v.length >= 8) || 'Password must be atleast 8 characters long',
-      ],
       emailRules: [
         (v) => !!v || 'E-Mail is required',
         (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
@@ -129,15 +125,15 @@ export default {
           password: this.password,
         });
 
-        const response = await fetch(`${VUE_APP_API_ENDPOINT}/user/register`, {
-          method: 'post',
+        await fetch(`${VUE_APP_API_ENDPOINT}/user/register`, {
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body,
         });
 
-        if (response.ok) this.$router.push({ name: 'home' });
+        this.$router.push({ name: 'home' });
       } catch (error) {
         console.log(error);
         this.error = error;
