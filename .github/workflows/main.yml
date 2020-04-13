@@ -27,3 +27,5 @@ jobs:
     
     - name: Running Tests
       run: npm run test:unit
+      env:
+        VUE_APP_API_ENDPOINT: http://localhost:4000/api
