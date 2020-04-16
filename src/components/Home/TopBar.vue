@@ -7,7 +7,7 @@
   >
     <h1>PaperHub</h1>
     <v-spacer />
-    <upload-dialog />
+    <upload-dialog v-if="loggedIn" />
     <v-btn
       to="/"
       text

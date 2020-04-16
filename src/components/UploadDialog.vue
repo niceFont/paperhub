@@ -8,7 +8,7 @@
   >
     <template v-slot:activator="{on}">
       <v-btn
-
+        tile
         class="qa-uploaddialog-open"
         depressed
         v-on="on"
