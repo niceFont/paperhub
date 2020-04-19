@@ -5,6 +5,7 @@
         <h1 class="text-center">
           Gallery
         </h1>
+
         <v-divider />
       </v-col>
     </v-row>
@@ -17,9 +18,28 @@
         sm="12"
         md="6"
       >
-        <v-card>
-          <v-img :src="url" />
-        </v-card>
+        <v-hover>
+          <template v-slot:default="{hover}">
+            <v-card>
+              <v-img :src="url" />
+              <v-fade-transition>
+                <v-overlay
+                  absolute
+                  color="gray"
+                  v-if="hover"
+                >
+                  <v-btn
+                    :href="url"
+                    color="primary"
+                    tile
+                  >
+                    Download
+                  </v-btn>
+                </v-overlay>
+              </v-fade-transition>
+            </v-card>
+          </template>
+        </v-hover>
       </v-col>
     </v-row>
   </v-container>

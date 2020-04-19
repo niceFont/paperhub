@@ -21,11 +21,18 @@ describe('actions.js', () => {
   it('logs user out', async () => {
     window.fetch.mockResolvedValue({});
     const commit = jest.fn();
-    await actions.logout({ commit });
+    const push = jest.fn();
+    const fakeThis = {
+      $router: {
+        push,
+      },
+    };
+    await actions.logout.call(fakeThis, { commit });
     expect(window.fetch).toHaveBeenCalledWith('http://localhost:4000/api/me/session', {
       credentials: 'include',
       method: 'DELETE',
     });
+    expect(push).toHaveBeenCalledWith({ name: 'Login' });
     expect(commit).toHaveBeenCalledWith('user/logout');
   });
 });

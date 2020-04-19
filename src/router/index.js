@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
+import store from '../store';
 
 Vue.use(VueRouter);
 
@@ -28,10 +29,32 @@ const routes = [
     name: 'Register',
     component: () => import(/* webpackChunkName: "about" */ '../views/Register.vue'),
   },
+  {
+    path: '/profile',
+    name: 'Profile',
+    meta: { isPrivate: true },
+    component: () => import('../views/Profile.vue'),
+  },
 ];
 
 const router = new VueRouter({
   routes,
+});
+
+let loaded = false;
+
+router.beforeEach(async (to, from, next) => {
+  if (!loaded) {
+    try {
+      await store.dispatch('loadSession');
+      loaded = true;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  if (to.meta.isPrivate && !store.state.isLoggedIn) {
+    next({ name: 'Login' });
+  } else next();
 });
 
 export default router;

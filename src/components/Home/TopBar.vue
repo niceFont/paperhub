@@ -15,13 +15,26 @@
     >
       Home
     </v-btn>
-    <template v-if="loggedIn">
+    <template
+      v-if="loggedIn"
+    >
+      <v-divider
+        class="ml-12"
+        vertical
+      />
       <v-btn
-        text
-        @click="logout"
-        color="error"
+        fab
+        class="ml-4"
+        depressed
+        small
+        @click="$emit('input', true)"
       >
-        Logout
+        <v-avatar
+          color="teal"
+          size="38"
+        >
+          <span class="white--text headline">{{ session.username[0] }}</span>
+        </v-avatar>
       </v-btn>
     </template>
     <template v-else>
@@ -43,18 +56,24 @@
 
 <script>
 import UploadDialog from '@/components/UploadDialog.vue';
-import { mapState, mapActions } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
+  props: {
+    value: {
+      type: Boolean,
+      required: true,
+    },
+  },
+  data: () => ({
+  }),
   components: {
     UploadDialog,
-  },
-  methods: {
-    ...mapActions(['logout']),
   },
   computed: {
     ...mapState({
       loggedIn: (state) => state.isLoggedIn,
+      session/* istanbul ignore next */: (state) => state.session,
     }),
   },
 };
