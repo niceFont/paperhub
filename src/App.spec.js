@@ -25,17 +25,10 @@ describe('App.vue', () => {
     vuetify: new Vuetify(),
   });
 
-  const sleep = (timeout) => new Promise((resolve) => setTimeout(resolve, timeout));
 
   it('renders', () => {
     const wrapper = mountPage({});
     expect(wrapper.isVueInstance()).toBe(true);
     expect(wrapper.classes()).toContain('qa-app');
-  });
-  it('loads session on mount', async () => {
-    const loadSession = jest.fn();
-    mountPage({ loadSession });
-    await sleep(1000);
-    expect(loadSession).toHaveBeenCalled();
   });
 });

@@ -1,6 +1,7 @@
 <template>
   <v-app class="qa-app">
-    <top-bar />
+    <top-bar v-model="drawer" />
+    <nav-drawer v-model="drawer" />
     <v-content>
       <router-view />
     </v-content>
@@ -9,22 +10,18 @@
 
 <script>
 import TopBar from '@/components/Home/TopBar.vue';
-import { mapActions } from 'vuex';
+import NavDrawer from '@/components/Home/NavDrawer.vue';
 
 export default {
   name: 'App',
 
   components: {
     TopBar,
-  },
-  mounted() {
-    this.loadSession();
-  },
-  methods: {
-    ...mapActions(['loadSession']),
+    NavDrawer,
   },
   data: () => ({
     //
+    drawer: false,
   }),
 };
 </script>
