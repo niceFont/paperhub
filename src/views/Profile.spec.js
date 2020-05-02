@@ -55,27 +55,11 @@ describe('Profile.vue', () => {
       .mockResolvedValueOnce({ json: jest.fn().mockResolvedValue({ images: [] }) });
     window.confirm = jest.fn(() => true);
     const wrapper = mountPage();
+    await wrapper.setData({ toBeDeleted: 0 });
+    await sleep(100);
     await wrapper.vm.deleteImage(0);
     await sleep(100);
     expect(window.fetch).toHaveBeenLastCalledWith('http://localhost:4000/api/me/images', {
-      method: 'DELETE',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ image: 0 }),
-    });
-    expect(wrapper.vm.$data.error).toBeNull();
-  });
-  it('does not delete on cancel', async () => {
-    window.fetch
-      .mockResolvedValue()
-      .mockResolvedValueOnce({ json: jest.fn().mockResolvedValue({ images: [] }) });
-    window.confirm = jest.fn(() => false);
-    const wrapper = mountPage();
-    await wrapper.vm.deleteImage(0);
-    await sleep(100);
-    expect(window.fetch).not.toHaveBeenLastCalledWith('http://localhost:4000/api/me/images', {
       method: 'DELETE',
       credentials: 'include',
       headers: {
@@ -90,8 +74,10 @@ describe('Profile.vue', () => {
       .mockRejectedValue(new Error('cool'))
       .mockResolvedValueOnce({ json: jest.fn().mockResolvedValue({ images: [] }) });
     const wrapper = mountPage();
+    wrapper.setData({ toBeDeleted: 0 });
+    await sleep(100);
     window.confirm = jest.fn(() => true);
-    await wrapper.vm.deleteImage(0);
+    await wrapper.vm.deleteImage();
     await sleep(100);
     expect(window.fetch).toHaveBeenLastCalledWith('http://localhost:4000/api/me/images', {
       method: 'DELETE',

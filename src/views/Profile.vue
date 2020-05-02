@@ -9,6 +9,7 @@
       </v-col>
     </v-row>
     <v-dialog
+      class="qa-delete-dialog"
       max-width="300"
       persistent
       v-model="isConfirming"
@@ -22,7 +23,8 @@
         <v-card-actions>
           <v-spacer />
           <v-btn
-            @click="tobeDeleted = null
+            class="qa-delete-cancel"
+            @click="toBeDeleted = null
                     isConfirming = false"
             text
             color="error"
@@ -46,7 +48,7 @@
         v-for="(image, index) in images"
         :key="index"
       >
-        <v-hover>
+        <v-hover class="qa-image-card">
           <template v-slot:default="{hover}">
             <v-card>
               <v-img :src="image.url" />
@@ -68,9 +70,10 @@
                   </v-btn>
                   <v-btn
                     tile
+                    class="qa-delete-button"
                     :disabled="loading"
                     @click.stop="
-                      tobeDeleted = image.id
+                      toBeDeleted = image.id
                       isConfirming = true
                     "
                     color="error"
@@ -97,7 +100,7 @@ export default {
     images: null,
     error: null,
     isConfirming: false,
-    tobeDeleted: null,
+    toBeDeleted: null,
     loading: false,
   }),
   mounted() {
@@ -113,7 +116,7 @@ export default {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ image: this.tobeDeleted }),
+          body: JSON.stringify({ image: this.toBeDeleted }),
         });
         window.location.reload();
       } catch (error) {

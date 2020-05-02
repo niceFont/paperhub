@@ -211,8 +211,11 @@ export default {
       if (file && file.type.includes('image')) {
         const fr = new FileReader();
         const image = new Image();
+        /* istanbul ignore next */
         image.onload = () => {
+          /* istanbul ignore next */
           this.width = image.clientWidth || image.width;
+          /* istanbul ignore next */
           this.height = image.clientHeight || image.height;
         };
         fr.onload = (data) => {
