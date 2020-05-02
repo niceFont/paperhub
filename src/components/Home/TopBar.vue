@@ -1,25 +1,25 @@
 <template>
   <v-app-bar
     app
+    flat
     class="qa-topbar"
     color="black"
     dark
   >
-    <h1>PaperHub</h1>
+    <v-btn
+      @click="$router.push({name: 'Home'})"
+      link
+      text
+    >
+      <h1>PaperHub</h1>
+    </v-btn>
     <v-spacer />
     <upload-dialog v-if="loggedIn" />
-    <v-btn
-      to="/"
-      text
-      class="ml-12"
-    >
-      Home
-    </v-btn>
     <template
       v-if="loggedIn"
     >
       <v-divider
-        class="ml-12"
+        class="ml-2"
         vertical
       />
       <v-btn

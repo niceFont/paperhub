@@ -4,12 +4,15 @@
     justify="center"
   >
     <v-col
-      cols="8"
+      cols="11"
+      sm="8"
+      md="6"
+      lg="6"
+      xl="4"
     >
       <v-card
         class="ml-auto mr-auto"
         max-width="1200"
-        min-height="600"
       >
         <v-toolbar
           class="mb-12"
@@ -67,12 +70,12 @@
           </v-row>
           <v-row justify="end">
             <v-col
-              class="d-flex justify-end"
-              cols="3"
+              class="pr-6 d-flex justify-end"
+              cols="4"
             >
               <v-btn
                 depressed
-                class="ma-10 qa-registerform-register"
+                class="qa-registerform-register"
                 dark
                 color="pink accent-3"
                 block

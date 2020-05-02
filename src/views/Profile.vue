@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 <template>
   <v-container class="qa-profile">
     <v-row>
@@ -7,6 +8,37 @@
         </h3>
       </v-col>
     </v-row>
+    <v-dialog
+      max-width="300"
+      persistent
+      v-model="isConfirming"
+    >
+      <v-card>
+        <v-card-title>Are you sure?</v-card-title>
+        <v-card-text>
+          By Confirming, you acknowledge that this Image will be permenantly
+          deleted and will not be accessible anymore.
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            @click="tobeDeleted = null
+                    isConfirming = false"
+            text
+            color="error"
+          >
+            Cancel
+          </v-btn>
+          <v-btn
+            text
+            @click="deleteImage"
+            color="success"
+          >
+            Confirm
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-divider />
     <v-row>
       <v-col
@@ -37,7 +69,10 @@
                   <v-btn
                     tile
                     :disabled="loading"
-                    @click="deleteImage(image.id)"
+                    @click.stop="
+                      tobeDeleted = image.id
+                      isConfirming = true
+                    "
                     color="error"
                   >
                     <v-icon>mdi-delete</v-icon>
@@ -61,17 +96,15 @@ export default {
   data: () => ({
     images: null,
     error: null,
+    isConfirming: false,
+    tobeDeleted: null,
     loading: false,
   }),
   mounted() {
     this.loadImages();
   },
   methods: {
-    async deleteImage(id) {
-      // change this to vuetify dialog
-      // eslint-disable-next-line no-restricted-globals
-      const isOkay = confirm('Are you sure you want to delete this Image?\nThis step is irreversible!');
-      if (!isOkay) return;
+    async deleteImage() {
       try {
         this.loading = true;
         await fetch(`${VUE_APP_API_ENDPOINT}/me/images`, {
@@ -80,7 +113,7 @@ export default {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ image: id }),
+          body: JSON.stringify({ image: this.tobeDeleted }),
         });
         window.location.reload();
       } catch (error) {
