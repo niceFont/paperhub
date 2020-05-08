@@ -7,8 +7,10 @@
     right
     absolute
   >
-    <v-toolbar>
-      Settings
+    <v-toolbar color="black">
+      <v-icon>mdi-format-list-checkbox</v-icon>
+      <v-spacer />
+      Menu
     </v-toolbar>
     <v-list>
       <v-list-item>
@@ -16,7 +18,9 @@
           text
           block
           to="profile"
+          outlined
         >
+          <v-icon>mdi-account</v-icon>
           Profile
         </v-btn>
       </v-list-item>
@@ -24,10 +28,11 @@
       <v-list-item>
         <v-btn
           block
-
+          outlined
           @click="logout"
           color="error"
         >
+          <v-icon>mdi-logout</v-icon>
           Logout
         </v-btn>
       </v-list-item>
