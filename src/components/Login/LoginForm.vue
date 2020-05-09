@@ -113,7 +113,6 @@ export default {
         this.$router.push({ name: '/' });
       } catch (error) {
         this.error = error;
-        console.log(error);
       }
     },
     ...mapMutations({

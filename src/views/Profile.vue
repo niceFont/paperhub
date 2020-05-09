@@ -121,7 +121,6 @@ export default {
         window.location.reload();
       } catch (error) {
         this.error = error;
-        console.log(error);
       } finally {
         this.loading = false;
       }
@@ -137,7 +136,6 @@ export default {
         this.images = images;
       } catch (error) {
         this.error = error;
-        console.log(error);
       }
     },
   },
