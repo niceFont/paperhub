@@ -45,12 +45,8 @@ let loaded = false;
 
 router.beforeEach(async (to, from, next) => {
   if (!loaded) {
-    try {
-      await store.dispatch('loadSession');
-      loaded = true;
-    } catch (error) {
-      console.log(error);
-    }
+    await store.dispatch('loadSession');
+    loaded = true;
   }
   if (to.meta.isPrivate && !store.state.isLoggedIn) {
     next({ name: 'Login' });

@@ -156,7 +156,6 @@ export default {
         const response = await fetch(`${VUE_APP_API_ENDPOINT}/categories`);
         this.categories = await response.json();
       } catch (error) {
-        console.error(error);
         this.error = error;
       }
     },
@@ -169,7 +168,6 @@ export default {
         body.append('width', this.width);
         body.append('height', this.height);
         body.append('category', this.category);
-        console.log(this.category);
         await fetch(`${VUE_APP_API_ENDPOINT}/images`, {
           method: 'POST',
           credentials: 'include',
@@ -177,7 +175,6 @@ export default {
         });
       } catch (error) {
         this.error = error;
-        console.log(error);
       } finally {
         this.loading = false;
         this.clear();

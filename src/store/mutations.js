@@ -10,4 +10,7 @@ export default {
   'user/logout': (state) => {
     Vue.set(state, 'isLoggedIn', false);
   },
+  error: (state, error) => {
+    Vue.set(state, 'error', error);
+  },
 };

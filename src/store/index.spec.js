@@ -7,6 +7,7 @@ describe('index.js', () => {
       state: {
         isLoggedIn: false,
         session: null,
+        error: null,
       },
       actions: {
         loadSession: expect.any(Function),
@@ -16,6 +17,7 @@ describe('index.js', () => {
         'user/session': expect.any(Function),
         'user/login': expect.any(Function),
         'user/logout': expect.any(Function),
+        error: expect.any(Function),
       },
       modules: {},
     }));

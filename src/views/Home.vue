@@ -68,7 +68,6 @@ export default {
         const { images } = await response.json();
         this.images = images;
       } catch (error) {
-        console.log(error);
         this.error = error;
       }
     },
