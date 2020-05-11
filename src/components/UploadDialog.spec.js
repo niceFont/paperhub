@@ -104,6 +104,7 @@ describe('UploadDialog.vue', () => {
     wrapper.find('.qa-uploaddialog-fileuploader').vm.$emit('change', file);
     await sleep(100);
     wrapper.find('.qa-uploaddialog-upload').vm.$emit('click');
+    await sleep(100);
     expect(window.fetch).toHaveBeenCalledWith('http://localhost:4000/api/images', {
       method: 'POST',
       credentials: 'include',
